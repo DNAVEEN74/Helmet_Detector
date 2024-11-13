@@ -1,0 +1,40 @@
+// Motor control pins
+const int IN1 = 8;
+const int IN2 = 9;
+const int IN3 = 10;
+const int IN4 = 11;
+
+// Define steps for a single rotation (adjust based on motor type)
+int stepSequence[8][4] = {
+  {1, 0, 0, 0},
+  {1, 1, 0, 0},
+  {0, 1, 0, 0},
+  {0, 1, 1, 0},
+  {0, 0, 1, 0},
+  {0, 0, 1, 1},
+  {0, 0, 0, 1},
+  {1, 0, 0, 1}
+};
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Motor control code started");
+
+  // Set motor control pins as output
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < 8; i++) {
+    digitalWrite(IN1, stepSequence[i][0]);
+    digitalWrite(IN2, stepSequence[i][1]);
+    digitalWrite(IN3, stepSequence[i][2]);
+    digitalWrite(IN4, stepSequence[i][3]);
+
+    // Short delay to stabilize motor speed
+    delayMicroseconds(750);  // Adjusted delay for motor speed
+  }
+}
