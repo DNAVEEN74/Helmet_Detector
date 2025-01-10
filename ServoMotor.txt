@@ -14,7 +14,7 @@ int stepSequence[8][4] = {
   {1, 0, 0, 1}
 };
 
-bool motorRunning = true;
+bool motorRunning = false;
 
 void setup() {
   Serial.begin(9600);
